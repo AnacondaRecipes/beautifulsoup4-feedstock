@@ -10,7 +10,8 @@ source:
 
 build:
   number: 0
-  skip: True  # [py<36]
+  # win32 failed to get install actions for noarch generic package
+  skip: True  # [py<36 or win32]
 
 outputs:
   - name: beautifulsoup4
