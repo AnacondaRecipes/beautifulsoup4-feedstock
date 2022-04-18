@@ -25,18 +25,6 @@ outputs:
       run:
         - python
         - soupsieve >=1.2
-    test:
-      source_files:
-        - bs4/tests
-      imports:
-        - bs4
-        - bs4.builder
-      requires:
-        - pip
-        - pytest
-      commands:
-        - pip check
-        - pytest bs4
 
   - name: bs4
     build:
@@ -50,13 +38,26 @@ outputs:
       imports:
         - bs4
       requires:
-        - html5lib
-        - lxml
         - pip
         - pytest
       commands:
         - pip check
-        - pytest bs4 -vvv
+        - pytest bs4 -vv
+
+test:
+  source_files:
+    - bs4/tests
+  imports:
+    - bs4
+    - bs4.builder
+  requires:
+    - html5lib
+    - lxml
+    - pip
+    - pytest
+  commands:
+    - pip check
+    - pytest bs4 -vv
 
 about:
   home: https://www.crummy.com/software/BeautifulSoup/
