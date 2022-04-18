@@ -42,7 +42,7 @@ outputs:
         - pytest
       commands:
         - pip check
-        - pytest bs4 -vv
+        - pytest bs4 -vv  
 
 test:
   source_files:
