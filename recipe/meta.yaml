@@ -34,31 +34,21 @@ outputs:
       run:
         - {{ pin_subpackage('beautifulsoup4', max_pin="x.x.x") }}
     test:
-      source_files:
-        - bs4/tests
       imports:
         - bs4
       requires:
         - pip
-        - pytest
       commands:
         - pip check
-        - pytest bs4 -vv  
 
 test:
-  source_files:
-    - bs4/tests
   imports:
     - bs4
     - bs4.builder
   requires:
-    - html5lib
-    - lxml
     - pip
-    - pytest
   commands:
     - pip check
-    - pytest bs4 -vv
 
 about:
   home: https://www.crummy.com/software/BeautifulSoup/
