@@ -1,7 +1,7 @@
 {% set version = "4.12.0" %}
 
 package:
-  name: beautifulsoup4
+  name: beautifulsoup4-split
   version: {{ version }}
 
 source:
@@ -10,8 +10,7 @@ source:
 
 build:
   number: 0
-  # win32 failed to get install actions for noarch generic package
-  skip: True  # [py<36 or win32]
+  skip: True  # [py<36]
 
 outputs:
   - name: beautifulsoup4
@@ -26,6 +25,14 @@ outputs:
       run:
         - python
         - soupsieve >=1.2
+      test:
+        imports:
+          - bs4
+          - bs4.builder
+        requires:
+          - pip
+        commands:
+          - pip check
 
   - name: bs4
     build:
@@ -36,31 +43,17 @@ outputs:
     test:
       imports:
         - bs4
-      requires:
-        - pip
-      commands:
-        - pip check
-
-test:
-  imports:
-    - bs4
-    - bs4.builder
-  requires:
-    - pip
-  commands:
-    - pip check
 
 about:
   home: https://www.crummy.com/software/BeautifulSoup/
   license: MIT
   license_family: MIT
-  license_file: COPYING.txt
+  license_file: LICENSE
   summary: Python library designed for screen-scraping
   description: |
     Beautiful Soup is a library for pulling data out of HTML and XML files.
     It provides ways of navigating, searching, and modifying parse trees.
   doc_url: https://beautiful-soup-4.readthedocs.io/en/latest/
-  doc_source_url: https://github.com/newvem/beautifulsoup4/blob/master/doc/source/index.rst
   dev_url: https://code.launchpad.net/beautifulsoup
 
 extra:
