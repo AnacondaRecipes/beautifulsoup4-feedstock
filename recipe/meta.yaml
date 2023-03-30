@@ -24,7 +24,7 @@ outputs:
         - wheel
       run:
         - python
-        - soupsieve >1.2
+        - soupsieve >=1.2
       test:
         imports:
           - bs4
