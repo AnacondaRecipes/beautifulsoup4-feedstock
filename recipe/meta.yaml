@@ -41,7 +41,13 @@ outputs:
     build:
       noarch: generic
     requirements:
+      host:
+        - python
+        - pip
+        - setuptools
+        - wheel
       run:
+        - python
         - {{ pin_subpackage('beautifulsoup4', max_pin="x.x.x") }}
     test:
       imports:
