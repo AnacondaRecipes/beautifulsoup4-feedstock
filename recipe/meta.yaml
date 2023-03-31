@@ -24,10 +24,7 @@ outputs:
         - wheel
       run:
         - python
-        - soupsieve >=1.2
-      run_constrained:
-        - html5lib
-        - lxml
+        - soupsieve >1.2
       test:
         imports:
           - bs4
