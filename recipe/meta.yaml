@@ -1,4 +1,4 @@
-{% set version = "4.12.0" %}
+{% set version = "4.12.2" %}
 
 package:
   name: beautifulsoup4-split
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/b/beautifulsoup4/beautifulsoup4-{{ version }}.tar.gz
-  sha256: c5fceeaec29d09c84970e47c65f2f0efe57872f7cff494c9691a26ec0ff13234
+  sha256: 492bbc69dca35d12daac71c4db1bfff0c876c00ef4a2ffacce226d4638eb72da
 
 build:
   number: 0
@@ -18,27 +18,29 @@ outputs:
     script: build_base.sh  # [not win]
     requirements:
       host:
-        - python
+        - hatchling >=1.8.0
         - pip
+        - python
         - setuptools
         - wheel
       run:
         - python
         - soupsieve >1.2
-      test:
-        imports:
-          - bs4
-          - bs4.builder
-        requires:
-          - pip
-        commands:
-          - pip check
+    test:
+      imports:
+        - bs4
+        - bs4.builder
+      requires:
+        - pip
+      commands:
+        - pip check
 
   - name: bs4
     build:
       noarch: generic
     requirements:
       host:
+        - hatchling >=1.8.0
         - python
         - pip
         - setuptools
@@ -49,6 +51,12 @@ outputs:
     test:
       imports:
         - bs4
+      requires:
+        - pip
+        - pytest
+      commands:
+        - pip check
+        - pytest --pyargs bs4
 
 about:
   home: https://www.crummy.com/software/BeautifulSoup/
