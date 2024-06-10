@@ -63,10 +63,13 @@ about:
   description: |
     Beautiful Soup is a library for pulling data out of HTML and XML files.
     It provides ways of navigating, searching, and modifying parse trees.
-  doc_url: https://beautiful-soup-4.readthedocs.io/en/latest/
+  doc_url: https://beautiful-soup-4.readthedocs.io/
   dev_url: https://code.launchpad.net/beautifulsoup
 
 extra:
   recipe-maintainers:
     - jschueller
     - nehaljwani
+  skip-lints:
+    - missing_wheel
+    - missing_python_build_tool
