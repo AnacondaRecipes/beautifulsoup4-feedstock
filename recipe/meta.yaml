@@ -10,7 +10,7 @@ source:
 
 build:
   number: 0
-  skip: true  # [py<36]
+  skip: true  # [py<37]
 
 outputs:
   - name: beautifulsoup4
