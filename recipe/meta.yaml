@@ -27,6 +27,8 @@ outputs:
         - soupsieve >1.2
         - typing-extensions >=4.0.0
     test:
+      source_files:
+        - bs4/tests
       imports:
         - bs4
         - bs4.builder
@@ -37,7 +39,11 @@ outputs:
         - pytest >=6
       commands:
         - pip check
-        - pytest --pyargs bs4 -k "not (test_rejected_markup or test_rejected_input)"
+        - mkdir ${SP_DIR}/bs4/tests  # [unix]
+        - cp -r bs4/tests ${SP_DIR}/bs4/  # [unix]
+        - md "%SP_DIR%\bs4\tests"  # [win]
+        - xcopy /E /I /Y "bs4\tests" "%SP_DIR%\bs4\tests"  # [win]
+        - pytest --pyargs bs4.tests
 
   - name: bs4
     build:
