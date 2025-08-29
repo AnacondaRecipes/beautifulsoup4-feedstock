@@ -1,31 +1,34 @@
-{% set version = "4.13.4" %}
+{% set name = "beautifulsoup4" %}
+{% set version = "4.13.5" %}
 
 package:
-  name: beautifulsoup4-split
+  name: {{ name }}-split
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/b/beautifulsoup4/beautifulsoup4-{{ version }}.tar.gz
-  sha256: dbb3c4e1ceae6aefebdaf2423247260cd062430a410e38c66f2baa50a8437195
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  sha256: 5e70131382930e7c3de33450a2f54a63d5e4b19386eab43a5b34d594268f3695
 
 build:
   number: 0
   skip: true  # [py<37]
 
 outputs:
-  - name: beautifulsoup4
+  - name: {{ name }}
     script: build_base.bat  # [win]
-    script: build_base.sh   # [not win]
+    script: build_base.sh   # [unix]
     requirements:
       host:
-        - hatchling >=1.8.0
         - pip
         - python
+        - hatchling
       run:
         - python
         - soupsieve >1.2
-        - typing-extensions
+        - typing-extensions >=4.0.0
     test:
+      source_files:
+        - bs4/tests
       imports:
         - bs4
         - bs4.builder
@@ -36,7 +39,11 @@ outputs:
         - pytest >=6
       commands:
         - pip check
-        - pytest --pyargs bs4 -k "not (test_rejected_markup or test_rejected_input)"
+        - mkdir ${SP_DIR}/bs4/tests  # [unix]
+        - cp -r bs4/tests ${SP_DIR}/bs4/  # [unix]
+        - md "%SP_DIR%\bs4\tests"  # [win]
+        - xcopy /E /I /Y "bs4\tests" "%SP_DIR%\bs4\tests"  # [win]
+        - pytest --pyargs bs4.tests
 
   - name: bs4
     build:
