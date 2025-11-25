@@ -1,5 +1,5 @@
 {% set name = "beautifulsoup4" %}
-{% set version = "4.13.5" %}
+{% set version = "4.14.2" %}
 
 package:
   name: {{ name }}-split
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 5e70131382930e7c3de33450a2f54a63d5e4b19386eab43a5b34d594268f3695
+  sha256: 2a98ab9f944a11acee9cc848508ec28d9228abfd522ef0fad6a02a72e0ded69e
 
 build:
   number: 0
@@ -16,7 +16,7 @@ build:
 outputs:
   - name: {{ name }}
     script: build_base.bat  # [win]
-    script: build_base.sh   # [unix]
+    script: build_base.sh  # [unix]
     requirements:
       host:
         - pip
@@ -44,7 +44,6 @@ outputs:
         - md "%SP_DIR%\bs4\tests"  # [win]
         - xcopy /E /I /Y "bs4\tests" "%SP_DIR%\bs4\tests"  # [win]
         - pytest --pyargs bs4.tests
-
   - name: bs4
     build:
       noarch: generic
