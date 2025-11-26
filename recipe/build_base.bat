@@ -1,4 +1,3 @@
-:: only really needed for win and py27,
-:: we can drop this line when we drop py27
-del /f /q NEWS.txt
-%PYTHON% -m pip install . --no-deps --no-build-isolation -vv
+
+%PYTHON% -m pip install . -vv --no-deps --no-build-isolation --ignore-installed
+if errorlevel 1 exit 1

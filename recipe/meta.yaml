@@ -62,7 +62,7 @@ outputs:
         - pip check
 
 about:
-  home: https://www.crummy.com/software/BeautifulSoup/
+  home: https://www.crummy.com/software/BeautifulSoup
   license: MIT
   license_family: MIT
   license_file: LICENSE
@@ -70,7 +70,7 @@ about:
   description: |
     Beautiful Soup is a library for pulling data out of HTML and XML files.
     It provides ways of navigating, searching, and modifying parse trees.
-  doc_url: https://beautiful-soup-4.readthedocs.io/
+  doc_url: https://beautiful-soup-4.readthedocs.io
   dev_url: https://code.launchpad.net/beautifulsoup
 
 extra:

@@ -1,1 +1,2 @@
-$PYTHON -m pip install . --no-deps --no-build-isolation -vv
+#!/bin/bash
+$PYTHON -m pip install . -vv --no-deps --no-build-isolation --ignore-installed
