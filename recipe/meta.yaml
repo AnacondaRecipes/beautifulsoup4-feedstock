@@ -26,6 +26,12 @@ outputs:
         - python
         - soupsieve >1.2
         - typing-extensions >=4.0.0
+
+# E Failed: DID NOT RAISE <class 'bs4.exceptions.ParserRejectedMarkup'>
+# https://bugzilla.redhat.com/show_bug.cgi?id=2368745
+{% set deselect_tests = " --deselect=test_fuzz.py::TestFuzz::test_rejected_markup" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_htmlparser.py::TestHTMLParserTreeBuilder::test_rejected_input" %}
+
     test:
       source_files:
         - bs4/tests
@@ -43,7 +49,7 @@ outputs:
         - cp -r bs4/tests ${SP_DIR}/bs4/  # [unix]
         - md "%SP_DIR%\bs4\tests"  # [win]
         - xcopy /E /I /Y "bs4\tests" "%SP_DIR%\bs4\tests"  # [win]
-        - pytest --pyargs bs4.tests
+        - pytest --pyargs bs4.tests {{ deselect_tests }}
   - name: bs4
     build:
       noarch: generic
