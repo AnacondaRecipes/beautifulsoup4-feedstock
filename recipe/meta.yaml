@@ -1,7 +1,5 @@
 {% set name = "beautifulsoup4" %}
 {% set version = "4.14.3" %}
-{% set deselect_tests = " --deselect=test_fuzz.py::TestFuzz::test_rejected_markup" %}
-{% set deselect_tests = 'deselect_tests + " --deselect=test_htmlparser.py::TestHTMLParserTreeBuilder::test_rejected_input"' %}
 
 package:
   name: {{ name }}-split
@@ -30,25 +28,28 @@ outputs:
         - typing-extensions >=4.0.0
 
 # E Failed: DID NOT RAISE <class 'bs4.exceptions.ParserRejectedMarkup'>
-<conda_recipe_manager.types.SentinelType object at 0x7f63540ec440>:  # https://bugzilla.redhat.com/show_bug.cgi?id=2368745
-  test:
-    source_files:
-      - bs4/tests
-    imports:
-      - bs4
-      - bs4.builder
-    requires:
-      - pip
-      - lxml
-      - html5lib
-      - pytest >=6
-    commands:
-      - pip check
-      - mkdir ${SP_DIR}/bs4/tests  # [unix]
-      - cp -r bs4/tests ${SP_DIR}/bs4/  # [unix]
-      - md "%SP_DIR%\bs4\tests"  # [win]
-      - xcopy /E /I /Y "bs4\tests" "%SP_DIR%\bs4\tests"  # [win]
-      - pytest --pyargs bs4.tests {{ deselect_tests }}
+# https://bugzilla.redhat.com/show_bug.cgi?id=2368745
+{% set deselect_tests = " --deselect=test_fuzz.py::TestFuzz::test_rejected_markup" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_htmlparser.py::TestHTMLParserTreeBuilder::test_rejected_input" %}
+
+    test:
+      source_files:
+        - bs4/tests
+      imports:
+        - bs4
+        - bs4.builder
+      requires:
+        - pip
+        - lxml
+        - html5lib
+        - pytest >=6
+      commands:
+        - pip check
+        - mkdir ${SP_DIR}/bs4/tests  # [unix]
+        - cp -r bs4/tests ${SP_DIR}/bs4/  # [unix]
+        - md "%SP_DIR%\bs4\tests"  # [win]
+        - xcopy /E /I /Y "bs4\tests" "%SP_DIR%\bs4\tests"  # [win]
+        - pytest --pyargs bs4.tests {{ deselect_tests }}
   - name: bs4
     build:
       noarch: generic
