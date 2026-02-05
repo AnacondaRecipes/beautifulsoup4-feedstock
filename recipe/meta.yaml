@@ -32,7 +32,7 @@ outputs:
 {% set deselect_tests = " --deselect=test_fuzz.py::TestFuzz::test_rejected_markup" %}
 {% set deselect_tests = deselect_tests + " --deselect=test_htmlparser.py::TestHTMLParserTreeBuilder::test_rejected_input" %}
 # https://bugs.launchpad.net/beautifulsoup/+bug/2134346
-{% set deselect_tests = deselect_tests + " --deselect=test_lxml.py::TestLXMLTreeBuilder.test_surrogate_in_character_reference" %}
+{% set deselect_tests = deselect_tests + " --deselect=test_lxml.py::TestLXMLTreeBuilder::test_surrogate_in_character_reference" %}
 
     test:
       source_files:
